@@ -6,9 +6,6 @@ from Gemini_API import *
 app = Flask(__name__)
 r = sr.Recognizer()
 
-UPLOAD_FOLDER = r'D:\Code\Speech'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
@@ -21,7 +18,7 @@ def upload_file():
     if not file.filename.endswith('.wav'):
         return jsonify({"error": "Invalid file format, only .wav allowed"}), 400
 
-    audio_path = os.path.join(app.config['UPLOAD_FOLDER'], 'audio.wav')
+    audio_path = 'audio.wav'
     file.save(audio_path)
 
     try:
